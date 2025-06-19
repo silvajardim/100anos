@@ -965,7 +965,7 @@ footer {
         </figure>
         <!-- Foto 3 -->
         <figure>
-          <img src="https://scontent.fcgh10-1.fna.fbcdn.net/v/t39.30808-6/491806319_3818047765112622_7898157423830332446_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=bjcajY7pHAAQ7kNvwHtuf2x&_nc_oc=Adk_O4pfe9Gdt4ei-1vBJRF7N4_nMZzoIrOijAWTDhiA-a00A7qSkEe2_GT971d4hCs&_nc_zt=23&_nc_ht=scontent.fcgh10-1.fna&_nc_gid=BGJclvCsDjuwuxMMv40BbA&oh=00_AfIzCZaRZgEPPdTz4MHLk4ADIXivryspZnVn12ttcgJ7EQ&oe=6840F97E"
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKvQtSkBwYG3Z-HoKY2Pft_EnfRQDVh6ptzQ&s"
             alt="Retrato de Antonio da Silva Jardim, patrono da escola.">
         </figure>
         <!-- Foto 4 -->
@@ -1121,7 +1121,43 @@ footer {
           <label for="comment">Comentário:</label>
           <textarea id="comment" name="comment" required></textarea>
           <button type="submit">Enviar Comentário</button>
+        </form>
+        <div id="commentsContainer"></div>
+      </div>
     </div>
+    <script>
+      // Salva e carrega comentários do localStorage (permanece após recarregar a página)
+      function renderComments() {
+        const container = document.getElementById('commentsContainer');
+        const comments = JSON.parse(localStorage.getItem('comentariosSilvaJardim') || '[]');
+        container.innerHTML = '';
+        if (comments.length === 0) {
+          container.innerHTML = '<p style="color:#777;text-align:center;">Nenhum comentário ainda. Seja o primeiro!</p>';
+        } else {
+          comments.forEach(function(c) {
+            const el = document.createElement('div');
+            el.className = 'comentario-exibido';
+            el.innerHTML = `<strong>${c.name}</strong><span>${c.text}</span><small>${c.date}</small>`;
+            container.appendChild(el);
+          });
+        }
+      }
+      document.getElementById('commentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const text = document.getElementById('comment').value.trim();
+        if (!name || !text) return;
+        const date = new Date().toLocaleString('pt-BR');
+        const comments = JSON.parse(localStorage.getItem('comentariosSilvaJardim') || '[]');
+        comments.unshift({ name, text, date });
+        localStorage.setItem('comentariosSilvaJardim', JSON.stringify(comments));
+        this.reset();
+        renderComments();
+      });
+      // Garante que os comentários sejam exibidos ao recarregar a página
+      document.addEventListener('DOMContentLoaded', renderComments);
+    </script>
+  </section>
 <!-- Rodapé -->
   <footer>
     <p>&copy; 2025 Centenário do Silva Jardim. Todos os direitos reservados.</p>
