@@ -1215,33 +1215,37 @@ button:hover {
       --max-width: 960px;
       --card-gap: 1.25rem;
       --radius: 12px;
-      --shadow: 0 6px 20px rgba(0,0,0,.08);
-      --bg: #1d1e1f;
-      --fg: #0f172a;
-      --muted: #475569;
-      --card-bg: #ffffff;
-      --accent: #2563eb;
-      --border: #e2e8f0;
+      --shadow: 0 6px 20px rgba(0,0,0,.3);
+      --bg: #1f1f1f;
+      --fg: #e2e2e2;
+      --muted: #a0a0a0;
+      --card-bg: #2a2a2a;
+      --accent: #4f8ef7;
+      --border: #3a3a3a;
     }
 
     html, body {
-      height: 100%;
-    }
-    body {
       margin: 0;
-      font-family: system-ui, sans-serif;
+      padding: 0;
+      height: 100%;
+      background: var(--bg);
       color: var(--fg);
-      background: radial-gradient(1200px 600px at 50% -10%, #1d1e1f 0%, transparent 60%) , var(--bg);
+      font-family: system-ui, sans-serif;
+      overflow-x: hidden;
     }
 
     .container {
-      min-height: 100svh;
-      display: grid;
-      place-items: start center;
-      padding: 2rem 1rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      width: 100%;
+      box-sizing: border-box;
     }
+
     .content {
-      width: min(100%, var(--max-width));
+      width: 100%;
+      max-width: var(--max-width);
       display: flex;
       flex-direction: column;
       gap: 2rem;
@@ -1250,18 +1254,20 @@ button:hover {
     header {
       text-align: center;
     }
+
     header h1 {
       margin: 0;
-      font-size: clamp(1.5rem, 2.5vw + 1rem, 2.25rem);
+      font-size: 2rem;
     }
+
     header p {
-      margin: .25rem 0 0;
+      margin-top: .25rem;
       color: var(--muted);
     }
 
     section h2 {
       margin: 0 0 .75rem;
-      font-size: clamp(1.125rem, 1vw + 1rem, 1.5rem);
+      font-size: 1.5rem;
       text-align: center;
     }
 
@@ -1270,22 +1276,23 @@ button:hover {
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 1.25rem;
+      padding: 1rem;
       width: 100%;
+      box-sizing: border-box;
     }
 
     .iframe-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      aspect-ratio: 3 / 4;
-      height: min(85vh, 1200px);
-      border-radius: calc(var(--radius) - 2px);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #fff;
-      margin-inline: auto;
-    }
+  position: relative;
+  width: 100%;
+  max-width: 600px; /* antes era 800px */
+  height: 720px;     /* antes era 1000px */
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+
     .iframe-wrap iframe {
       position: absolute;
       inset: 0;
@@ -1297,7 +1304,7 @@ button:hover {
     .table-wrap {
       width: 100%;
       overflow-x: auto;
-      border-radius: calc(var(--radius) - 2px);
+      border-radius: var(--radius);
       border: 1px solid var(--border);
     }
 
@@ -1310,7 +1317,7 @@ button:hover {
 
     thead th {
       text-align: left;
-      background: #f8fafc;
+      background: #333;
       color: var(--muted);
       font-weight: 600;
       border-bottom: 1px solid var(--border);
@@ -1326,24 +1333,38 @@ button:hover {
     }
 
     tbody tr:nth-child(even) td {
-      background: #fcfdff;
+      background: #2f2f2f;
     }
 
-    /* Colunas fixas */
     th:nth-child(1), td:nth-child(1) {
       width: 20%;
     }
+
     th:nth-child(2), td:nth-child(2) {
       width: 60%;
+      white-space: pre-wrap;
     }
+
     th:nth-child(3), td:nth-child(3) {
       width: 20%;
       white-space: nowrap;
     }
 
     @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.75rem;
+      }
+
+      section h2 {
+        font-size: 1.25rem;
+      }
+
       .iframe-wrap {
         aspect-ratio: 9 / 16;
+      }
+
+      table {
+        font-size: 0.875rem;
       }
     }
   </style>
