@@ -1204,84 +1204,222 @@ button:hover {
     margin-bottom: 5px;
 }
     </style>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comentários</title>
+  <style>
+    :root {
+      --max-width: 960px;
+      --card-gap: 1.25rem;
+      --radius: 12px;
+      --shadow: 0 6px 20px rgba(0,0,0,.08);
+      --bg: #1d1e1f;
+      --fg: #0f172a;
+      --muted: #475569;
+      --card-bg: #ffffff;
+      --accent: #2563eb;
+      --border: #e2e8f0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      color: var(--fg);
+      background: radial-gradient(1200px 600px at 50% -10%, #1d1e1f 0%, transparent 60%) , var(--bg);
+    }
+
+    .container {
+      min-height: 100svh;
+      display: grid;
+      place-items: start center;
+      padding: 2rem 1rem 3rem;
+    }
+    .content {
+      width: min(100%, var(--max-width));
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    header {
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.5vw + 1rem, 2.25rem);
+    }
+    header p {
+      margin: .25rem 0 0;
+      color: var(--muted);
+    }
+
+    section h2 {
+      margin: 0 0 .75rem;
+      font-size: clamp(1.125rem, 1vw + 1rem, 1.5rem);
+      text-align: center;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+      width: 100%;
+    }
+
+    .iframe-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 3 / 4;
+      height: min(85vh, 1200px);
+      border-radius: calc(var(--radius) - 2px);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+      margin-inline: auto;
+    }
+    .iframe-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: calc(var(--radius) - 2px);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      min-width: 600px;
+    }
+
+    thead th {
+      text-align: left;
+      background: #f8fafc;
+      color: var(--muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 1rem;
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #fcfdff;
+    }
+
+    /* Colunas fixas */
+    th:nth-child(1), td:nth-child(1) {
+      width: 20%;
+    }
+    th:nth-child(2), td:nth-child(2) {
+      width: 60%;
+    }
+    th:nth-child(3), td:nth-child(3) {
+      width: 20%;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 480px) {
+      .iframe-wrap {
+        aspect-ratio: 9 / 16;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Deixe seu comentário!</h1>
-    
-    <form id="formComentario">
-        <label for="nome">Nome:</label><br>
-        <input type="text" id="nome" placeholder="Seu nome" required><br><br>
-        
-        <label for="comentario">Comentário:</label><br>
-        <textarea id="comentario" placeholder="Digite seu comentário" required></textarea><br><br>
-        
-        <button type="button" onclick="salvarComentario()">Enviar Comentário</button>
-    </form>
 
-    <h2>Comentários:</h2>
-    <div id="comentariosList"></div>
+  <div class="container">
+    <div class="content">
 
-    <script>
-        // Função para salvar comentário no localStorage
-        function salvarComentario() {
-            // Pega os valores dos campos
-            const nome = document.getElementById('nome').value;
-            const comentario = document.getElementById('comentario').value;
+      <header>
+        <h1>Comentários</h1>
+        <p>Envie seu feedback e veja os comentários recebidos</p>
+      </header>
 
-            if (nome && comentario) {
-                // Cria um objeto com o nome e o comentário
-                const comentarioObj = {
-                    nome: nome,
-                    comentario: comentario
-                };
+      <section id="formulario">
+        <h2>Envie seu comentário</h2>
+        <div class="card">
+          <div class="iframe-wrap">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSfAJQKwRlfjdgbNnM5vbmMRGDqoJlzvymVM-HdCY5Q_PSivaA/viewform?usp=dialog"
+              loading="lazy"
+              title="Formulário de comentários">
+              Carregando…
+            </iframe>
+          </div>
+        </div>
+      </section>
 
-                // Pega os comentários armazenados ou cria um array vazio
-                let comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
+      <section id="comentarios">
+        <h2>Comentários recebidos</h2>
+        <div class="card">
+          <div class="table-wrap">
+            <table id="tabela-comentarios">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Comentário</th>
+                  <th>Data</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populado via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-                // Adiciona o novo comentário
-                comentarios.push(comentarioObj);
+    </div>
+  </div>
 
-                // Salva no localStorage
-                localStorage.setItem('comentarios', JSON.stringify(comentarios));
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1kQDuvDfQHIDjSV-4rDfz0d4uWdfzjhLvkpPcg6zN1lE/export?format=csv";
 
-                // Limpa os campos do formulário
-                document.getElementById('formComentario').reset();
+    fetch(SHEET_CSV_URL + "&_ts=" + Date.now())
+      .then(response => response.text())
+      .then(csvText => {
+        const resultado = Papa.parse(csvText, { header: true });
+        const tabela = document.querySelector('#tabela-comentarios tbody');
 
-                // Exibe os comentários
-                exibirComentarios();
-            } else {
-                alert("Por favor, preencha todos os campos.");
-            }
-        }
+        resultado.data.forEach(linha => {
+          if (linha.Nome && linha.Comentario && linha.Data) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td data-label="Nome">${linha.Nome}</td>
+              <td data-label="Comentário">${linha.Comentario}</td>
+              <td data-label="Data">${linha.Data}</td>
+            `;
+            tabela.appendChild(tr);
+          }
+        });
+      })
+      .catch(error => console.error("Erro ao carregar dados:", error));
+  </script>
 
-        // Função para exibir os comentários
-        function exibirComentarios() {
-            // Pega os comentários armazenados
-            let comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
-            let lista = document.getElementById('comentariosList');
-            lista.innerHTML = "";  // Limpa a lista antes de exibir novamente
-
-            // Exibe cada comentário
-            comentarios.forEach(comentario => {
-                let div = document.createElement('div');
-                div.classList.add('comentario');
-
-                let nome = document.createElement('p');
-                nome.classList.add('nome');
-                nome.textContent = comentario.nome;
-
-                let textoComentario = document.createElement('p');
-                textoComentario.textContent = comentario.comentario;
-
-                div.appendChild(nome);
-                div.appendChild(textoComentario);
-                lista.appendChild(div);
-            });
-        }
-
-        // Chama a função para exibir os comentários ao carregar a página
-        window.onload = exibirComentarios;
-    </script>
 </body>
 </html>
 <!-- Rodapé -->
