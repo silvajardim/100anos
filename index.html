@@ -568,6 +568,49 @@ footer {
       .timeline { padding-left: 10px; }
       .timeline-event { padding: 10px 6px 10px 16px; }
     }
+.sobre-site {
+  background: linear-gradient(120deg, #0a0a0a 80%, #050505 100%);
+  color: #f1f1f1;
+  padding: 56px 0 32px;
+}
+
+.sobre-site__container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.sobre-site__title {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: #ffffff;
+}
+
+.sobre-site__text {
+  font-size: 1.13rem;
+  line-height: 1.6;
+  color: #dddddd;
+  margin-bottom: 18px;
+}
+
+.sobre-site__features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.sobre-site__feature {
+  margin-bottom: 12px;
+}
+
+.btn--primary {
+  display: inline-block;
+  background-color: #1e90ff;
+  color: #ffffff;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 4px;
+}
   </style>
 </head>
 <body>
@@ -683,10 +726,43 @@ footer {
   <section id="sobre-site" style="background: linear-gradient(120deg, #f3f4f7 80%, #e0e3ea 100%); padding: 56px 0 32px 0;">
     <div class="section-container" style="max-width: 800px;">
       <h2 style="margin-top:0; color: #23272f;">Sobre o Site</h2>
-      <p style="color: #444950; font-size: 1.13rem; margin-bottom: 18px;">
-        Este site foi criado para celebrar o centenário da Escola Estadual Silva Jardim, reunindo informações históricas, curiosidades, depoimentos, fotos, documentos e registros que contam a trajetória da instituição ao longo de 100 anos. O objetivo é preservar a memória da escola, valorizar sua importância para a comunidade do Tucuruvi e proporcionar um espaço de interação entre ex-alunos, professores, colaboradores e toda a sociedade.
-      </p>
-  </section>
+      <p class="sobre-site__text">
+      Criado para celebrar o centenário da Escola Estadual Silva Jardim, este portal reúne informações históricas, curiosidades, depoimentos, fotos, documentos e registros que contam 100 anos de dedicação à comunidade do Tucuruvi.
+    </p>
+
+    <p class="sobre-site__text">
+      Nosso objetivo é preservar a memória da escola, valorizar sua importância local e oferecer um espaço interativo para ex-alunos, professores, colaboradores e toda a sociedade.
+    </p>
+
+    <ul class="sobre-site__features">
+      <li class="sobre-site__feature">
+        <strong>Linha do Tempo Interativa:</strong> acompanhe marcos históricos da criação em 1925 até os dias atuais.
+      </li>
+      <li class="sobre-site__feature">
+        <strong>Depoimentos em Texto e Vídeo:</strong> relatos emocionantes de quem viveu a tradição Silva Jardim.
+      </li>
+      <li class="sobre-site__feature">
+        <strong>Galeria de Imagens:</strong> fotografias antigas e contemporâneas digitalizadas em alta resolução.
+      </li>
+      <li class="sobre-site__feature">
+        <strong>Documentos Históricos:</strong> atas, jornais de época e projetos pedagógicos disponíveis para download.
+      </li>
+      <li class="sobre-site__feature">
+        <strong>Espaço Colaborativo:</strong> envie sua foto, crônica ou homenagem através do formulário de contribuições.
+      </li>
+    </ul>
+
+    <p class="sobre-site__text">
+      O site é colaborativo e está sempre em expansão. Se você guarda memórias do Silva Jardim, participe compartilhando suas fotos, histórias e sugestões. Vamos manter viva a tradição para as futuras gerações!
+    </p>
+
+    <div class="sobre-site__cta">
+      <a href="#comentarios" class="btn btn--primary" role="button">
+        Contribua com suas Memórias
+      </a>
+    </div>
+  </div>
+</section>
   <!-- Introdução e Contexto -->
   <section id="contexto" style="background: linear-gradient(120deg, #f3f4f7 80%, #e0e3ea 100%); padding: 56px 0 32px 0;">
     <div class="section-container" style="max-width: 800px;">
